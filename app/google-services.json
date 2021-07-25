@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "183010466440",
+    "project_id": "armario-97087",
+    "storage_bucket": "armario-97087.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183010466440:android:6cbb6d344abd2d2e36dd3d",
+        "android_client_info": {
+          "package_name": "com.example.armario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183010466440-jgp7q2tjisut4cnmg519akbq5lhee8on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuIRRj96zs2Fior2eflT_II6y64zDq_BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183010466440-jgp7q2tjisut4cnmg519akbq5lhee8on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183010466440:android:8ae71f3f3dbdb6af36dd3d",
+        "android_client_info": {
+          "package_name": "com.example.notesapptutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183010466440-jgp7q2tjisut4cnmg519akbq5lhee8on.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuIRRj96zs2Fior2eflT_II6y64zDq_BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183010466440-jgp7q2tjisut4cnmg519akbq5lhee8on.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
