@@ -25,8 +25,8 @@ import java.util.Map;
 public class editpassactivity extends AppCompatActivity {
 
     Intent data;
-    EditText medittitleofnote,meditcontentofnote;
-    FloatingActionButton msaveeditnote;
+    EditText medittitleofpass,meditcontentofpass;
+    FloatingActionButton msaveeditpass;
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
@@ -36,10 +36,10 @@ public class editpassactivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editnoteactivity);
-        medittitleofnote=findViewById(R.id.edittitleofnote);
-        meditcontentofnote=findViewById(R.id.editcontentofnote);
-        msaveeditnote=findViewById(R.id.saveeditnote);
+        setContentView(R.layout.activity_editpassactivity);
+        medittitleofpass=findViewById(R.id.edittitleofpass);
+        meditcontentofpass=findViewById(R.id.editcontentofpass);
+        msaveeditpass=findViewById(R.id.saveeditpass);
 
         data=getIntent();
 
@@ -47,19 +47,19 @@ public class editpassactivity extends AppCompatActivity {
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
 
 
-        Toolbar toolbar=findViewById(R.id.toolbarofeditnote);
+        Toolbar toolbar=findViewById(R.id.toolbarofeditpass);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
-        msaveeditnote.setOnClickListener(new View.OnClickListener() {
+        msaveeditpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(),"savebuton click",Toast.LENGTH_SHORT).show();
 
-                String newtitle=medittitleofnote.getText().toString();
-                String newcontent=meditcontentofnote.getText().toString();
+                String newtitle=medittitleofpass.getText().toString();
+                String newcontent=meditcontentofpass.getText().toString();
 
                 if(newtitle.isEmpty()||newcontent.isEmpty())
                 {
@@ -68,15 +68,15 @@ public class editpassactivity extends AppCompatActivity {
                 }
                 else
                 {
-                    DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document(data.getStringExtra("noteId"));
-                    Map<String,Object> note=new HashMap<>();
-                    note.put("title",newtitle);
-                    note.put("content",newcontent);
-                    documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document(data.getStringExtra("passId"));
+                    Map<String,Object> pass=new HashMap<>();
+                    pass.put("title",newtitle);
+                    pass.put("content",newcontent);
+                    documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(),"Note is updated",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(editpassactivity.this,notesactivity.class));
+                            Toast.makeText(getApplicationContext(),"Password is updated",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(editpassactivity.this,passwordactivity.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -90,10 +90,10 @@ public class editpassactivity extends AppCompatActivity {
         });
 
 
-        String notetitle=data.getStringExtra("title");
-        String notecontent=data.getStringExtra("content");
-        meditcontentofnote.setText(notecontent);
-        medittitleofnote.setText(notetitle);
+        String passSite=data.getStringExtra("site");
+        String passPassword=data.getStringExtra("password");
+        meditcontentofpass.setText(passPassword);
+        medittitleofpass.setText(passSite);
     }
 
     @Override

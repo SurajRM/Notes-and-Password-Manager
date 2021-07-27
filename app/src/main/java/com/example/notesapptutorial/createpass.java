@@ -25,27 +25,27 @@ import java.util.Map;
 
 public class createpass extends AppCompatActivity {
 
-    EditText mcreatetitleofnote,mcreatecontentofnote;
-    FloatingActionButton msavenote;
+    EditText mcreatetitleofpass,mcreatecontentofpass;
+    FloatingActionButton msavepass;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    ProgressBar mprogressbarofcreatenote;
+    ProgressBar mprogressbarofcreatepass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createnote);
+        setContentView(R.layout.activity_createpass);
 
 
 
-        msavenote=findViewById(R.id.savenote);
-        mcreatecontentofnote=findViewById(R.id.createcontentofnote);
-        mcreatetitleofnote=findViewById(R.id.createtitleofnote);
+        msavepass=findViewById(R.id.savepass);
+        mcreatecontentofpass=findViewById(R.id.createcontentofpass);
+        mcreatetitleofpass=findViewById(R.id.createtitleofpass);
 
-        mprogressbarofcreatenote=findViewById(R.id.progressbarofcreatenote);
-        Toolbar toolbar=findViewById(R.id.toolbarofcreatenote);
+        mprogressbarofcreatepass=findViewById(R.id.progressbarofcreatepass);
+        Toolbar toolbar=findViewById(R.id.toolbarofcreatepass);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -55,11 +55,11 @@ public class createpass extends AppCompatActivity {
 
 
 
-        msavenote.setOnClickListener(new View.OnClickListener() {
+        msavepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title=mcreatetitleofnote.getText().toString();
-                String content=mcreatecontentofnote.getText().toString();
+                String title=mcreatetitleofpass.getText().toString();
+                String content=mcreatecontentofpass.getText().toString();
                 if(title.isEmpty() || content.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),"Both field are Require",Toast.LENGTH_SHORT).show();
@@ -67,25 +67,25 @@ public class createpass extends AppCompatActivity {
                 else
                 {
 
-                    mprogressbarofcreatenote.setVisibility(View.VISIBLE);
+                    mprogressbarofcreatepass.setVisibility(View.VISIBLE);
 
-                    DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document();
-                    Map<String ,Object> note= new HashMap<>();
-                    note.put("title",title);
-                    note.put("content",content);
+                    DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document();
+                    Map<String ,Object> pass= new HashMap<>();
+                    pass.put("title",title);
+                    pass.put("content",content);
 
-                    documentReference.set(note).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(),"Note Created Succesffuly",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(createpass.this,notesactivity.class));
+                            Toast.makeText(getApplicationContext(),"Password Saved Succesffuly",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(createpass.this,passwordactivity.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"Failed To Create Note",Toast.LENGTH_SHORT).show();
-                            mprogressbarofcreatenote.setVisibility(View.INVISIBLE);
-                           // startActivity(new Intent(createnote.this,notesactivity.class));
+                            Toast.makeText(getApplicationContext(),"Failed To Save Password",Toast.LENGTH_SHORT).show();
+                            mprogressbarofcreatepass.setVisibility(View.INVISIBLE);
+                           // startActivity(new Intent(createpass.this,passwordactivity.class));
                         }
                     });
 
