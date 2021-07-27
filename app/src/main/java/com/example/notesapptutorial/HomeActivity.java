@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, notesactivity.class);
-                finish();
+                startActivity(intent);
             }
         });
 
@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, passwordactivity.class);
-                finish();
+                startActivity(intent);
             }
         });
     }
