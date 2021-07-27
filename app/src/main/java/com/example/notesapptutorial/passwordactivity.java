@@ -49,7 +49,7 @@ public class passwordactivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    FirestoreRecyclerAdapter<firebasemodelp,PassViewHolder> passAdapter;
+    FirestoreRecyclerAdapter<firebasemodel,PassViewHolder> passAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +74,11 @@ public class passwordactivity extends AppCompatActivity {
         });
 
 
-        Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("title",Query.Direction.ASCENDING);
+        Query query=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").orderBy("site",Query.Direction.ASCENDING);
 
-        FirestoreRecyclerOptions<firebasemodelp> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodelp>().setQuery(query,firebasemodelp.class).build();
+        FirestoreRecyclerOptions<firebasemodel> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
 
-        passAdapter= new FirestoreRecyclerAdapter<firebasemodelp, PassViewHolder>(alluserpass) {
+        passAdapter= new FirestoreRecyclerAdapter<firebasemodel, PassViewHolder>(alluserpass) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void onBindViewHolder(@NonNull PassViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
@@ -101,8 +101,8 @@ public class passwordactivity extends AppCompatActivity {
 
 
                         Intent intent=new Intent(v.getContext(),passdetails.class);
-                        intent.putExtra("site",firebasemodelp.getSite());
-                        intent.putExtra("password",firebasemodelp.getPassword());
+                        intent.putExtra("site",firebasemodel.getSite());
+                        intent.putExtra("password",firebasemodel.getPassword());
                         intent.putExtra("passId",docIdp);
 
                         v.getContext().startActivity(intent);
@@ -122,9 +122,9 @@ public class passwordactivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
 
-                                Intent intent=new Intent(v.getContext(),editnoteactivity.class);
-                                intent.putExtra("site",firebasemodelp.getSite());
-                                intent.putExtra("password",firebasemodelp.getPassword());
+                                Intent intent=new Intent(v.getContext(), editnoteactivity.class);
+                                intent.putExtra("site",firebasemodel.getSite());
+                                intent.putExtra("password",firebasemodel.getPassword());
                                 intent.putExtra("passId",docIdp);
                                 v.getContext().startActivity(intent);
                                 return false;
@@ -178,7 +178,7 @@ public class passwordactivity extends AppCompatActivity {
 
     }
 
-    public class PassViewHolder extends RecyclerView.ViewHolder
+    public static class PassViewHolder extends RecyclerView.ViewHolder
     {
         public static View itemView;
         private TextView passtitle;
@@ -213,7 +213,7 @@ public class passwordactivity extends AppCompatActivity {
             case R.id.logout:
                 firebaseAuth.signOut();
                 finish();
-                startActivity(new Intent(passwordactivity.this,MainActivity.class));
+                startActivity(new Intent(passwordactivity.this, MainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

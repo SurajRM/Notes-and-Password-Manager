@@ -68,7 +68,7 @@ public class notesactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(notesactivity.this,createnote.class));
+                startActivity(new Intent(notesactivity.this, createnote.class));
 
             }
         });
@@ -100,7 +100,7 @@ public class notesactivity extends AppCompatActivity {
                         //we have to open note detail activity
 
 
-                        Intent intent=new Intent(v.getContext(),notedetails.class);
+                        Intent intent=new Intent(v.getContext(), notedetails.class);
                         intent.putExtra("title",firebasemodel.getTitle());
                         intent.putExtra("content",firebasemodel.getContent());
                         intent.putExtra("noteId",docId);
@@ -122,7 +122,7 @@ public class notesactivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
 
-                                Intent intent=new Intent(v.getContext(),editnoteactivity.class);
+                                Intent intent=new Intent(v.getContext(), editnoteactivity.class);
                                 intent.putExtra("title",firebasemodel.getTitle());
                                 intent.putExtra("content",firebasemodel.getContent());
                                 intent.putExtra("noteId",docId);
@@ -212,7 +212,7 @@ public class notesactivity extends AppCompatActivity {
             case R.id.logout:
                 firebaseAuth.signOut();
                 finish();
-                startActivity(new Intent(notesactivity.this,MainActivity.class));
+                startActivity(new Intent(notesactivity.this, MainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

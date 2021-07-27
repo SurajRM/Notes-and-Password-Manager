@@ -77,7 +77,7 @@ public class editnoteactivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(),"Note is updated",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(editnoteactivity.this,notesactivity.class));
+                            startActivity(new Intent(editnoteactivity.this, notesactivity.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

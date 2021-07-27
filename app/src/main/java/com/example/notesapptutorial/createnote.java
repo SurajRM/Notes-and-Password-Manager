@@ -79,7 +79,7 @@ public class createnote extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(),"Note Created Succesffuly",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(createnote.this,notesactivity.class));
+                            startActivity(new Intent(createnote.this, notesactivity.class));
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
