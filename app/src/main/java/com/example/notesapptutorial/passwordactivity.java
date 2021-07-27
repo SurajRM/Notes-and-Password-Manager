@@ -1,11 +1,5 @@
 package com.example.notesapptutorial;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -36,27 +36,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class notesactivity extends AppCompatActivity {
+public class passwordactivity extends AppCompatActivity {
 
-    FloatingActionButton mcreatenotesfab;
+    FloatingActionButton mcreatepass;
     private FirebaseAuth firebaseAuth;
 
 
-    RecyclerView mrecyclerview;
+    RecyclerView mrecyclerviewp;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
 
 
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    FirestoreRecyclerAdapter<firebasemodel,NoteViewHolder> noteAdapter;
+    FirestoreRecyclerAdapter<firebasemodelp,PassViewHolder> passAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notesactivity);
+        setContentView(R.layout.activity_passwordactivity);
 
-        mcreatenotesfab=findViewById(R.id.createnotesfab);
+        mcreatepass=findViewById(R.id.createpassb);
         firebaseAuth=FirebaseAuth.getInstance();
 
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
@@ -64,11 +64,11 @@ public class notesactivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("All Notes");
 
-        mcreatenotesfab.setOnClickListener(new View.OnClickListener() {
+        mcreatepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(notesactivity.this,createnote.class));
+                startActivity(new Intent(passwordactivity.this,createpass.class));
 
             }
         });
@@ -76,34 +76,34 @@ public class notesactivity extends AppCompatActivity {
 
         Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("title",Query.Direction.ASCENDING);
 
-        FirestoreRecyclerOptions<firebasemodel> allusernotes= new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
+        FirestoreRecyclerOptions<firebasemodelp> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodelp>().setQuery(query,firebasemodelp.class).build();
 
-        noteAdapter= new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusernotes) {
+        passAdapter= new FirestoreRecyclerAdapter<firebasemodelp, PassViewHolder>(alluserpass) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
-            protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
+            protected void onBindViewHolder(@NonNull PassViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
 
-                ImageView popupbutton=noteViewHolder.itemView.findViewById(R.id.menupopbutton);
+                ImageView popupbutton=PassViewHolder.itemView.findViewById(R.id.menupopbuttonp);
 
                 int colourcode=getRandomColor();
-                noteViewHolder.mnote.setBackgroundColor(noteViewHolder.itemView.getResources().getColor(colourcode,null));
+                noteViewHolder.mpass.setBackgroundColor(PassViewHolder.itemView.getResources().getColor(colourcode,null));
 
-                noteViewHolder.notetitle.setText(firebasemodel.getTitle());
-                noteViewHolder.notecontent.setText(firebasemodel.getContent());
+                noteViewHolder.passtitle.setText(firebasemodel.getTitle());
+                noteViewHolder.passcontent.setText(firebasemodel.getContent());
 
-                String docId=noteAdapter.getSnapshots().getSnapshot(i).getId();
+                String docIdp=passAdapter.getSnapshots().getSnapshot(i).getId();
 
-                noteViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                PassViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //we have to open note detail activity
 
 
-                        Intent intent=new Intent(v.getContext(),notedetails.class);
-                        intent.putExtra("title",firebasemodel.getTitle());
-                        intent.putExtra("content",firebasemodel.getContent());
-                        intent.putExtra("noteId",docId);
+                        Intent intent=new Intent(v.getContext(),passdetails.class);
+                        intent.putExtra("site",firebasemodelp.getSite());
+                        intent.putExtra("password",firebasemodelp.getPassword());
+                        intent.putExtra("passId",docIdp);
 
                         v.getContext().startActivity(intent);
 
@@ -123,9 +123,9 @@ public class notesactivity extends AppCompatActivity {
                             public boolean onMenuItemClick(MenuItem item) {
 
                                 Intent intent=new Intent(v.getContext(),editnoteactivity.class);
-                                intent.putExtra("title",firebasemodel.getTitle());
-                                intent.putExtra("content",firebasemodel.getContent());
-                                intent.putExtra("noteId",docId);
+                                intent.putExtra("site",firebasemodelp.getSite());
+                                intent.putExtra("password",firebasemodelp.getPassword());
+                                intent.putExtra("passId",docIdp);
                                 v.getContext().startActivity(intent);
                                 return false;
                             }
@@ -135,7 +135,7 @@ public class notesactivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 //Toast.makeText(v.getContext(),"This note is deleted",Toast.LENGTH_SHORT).show();
-                                DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document(docId);
+                                DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document(docIdp);
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -162,33 +162,34 @@ public class notesactivity extends AppCompatActivity {
 
             @NonNull
             @Override
-            public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-               View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_layout,parent,false);
-               return new NoteViewHolder(view);
+            public PassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+               View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pass_layout,parent,false);
+               return new PassViewHolder(view);
             }
         };
 
 
-        mrecyclerview=findViewById(R.id.recyclerview);
-        mrecyclerview.setHasFixedSize(true);
+        mrecyclerviewp=findViewById(R.id.recyclerviewp);
+        mrecyclerviewp.setHasFixedSize(true);
         staggeredGridLayoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        mrecyclerview.setLayoutManager(staggeredGridLayoutManager);
-        mrecyclerview.setAdapter(noteAdapter);
+        mrecyclerviewp.setLayoutManager(staggeredGridLayoutManager);
+        mrecyclerviewp.setAdapter(passAdapter);
 
 
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder
+    public class PassViewHolder extends RecyclerView.ViewHolder
     {
-        private TextView notetitle;
-        private TextView notecontent;
-        LinearLayout mnote;
+        public static View itemView;
+        private TextView passtitle;
+        private TextView passcontent;
+        LinearLayout mpass;
 
-        public NoteViewHolder(@NonNull View itemView) {
+        public PassViewHolder(@NonNull View itemView) {
             super(itemView);
-            notetitle=itemView.findViewById(R.id.notetitle);
-            notecontent=itemView.findViewById(R.id.notecontent);
-            mnote=itemView.findViewById(R.id.note);
+            passtitle=itemView.findViewById(R.id.passtitle);
+            passcontent=itemView.findViewById(R.id.passcontent);
+            mpass=itemView.findViewById(R.id.pass);
 
 
         }
@@ -212,7 +213,7 @@ public class notesactivity extends AppCompatActivity {
             case R.id.logout:
                 firebaseAuth.signOut();
                 finish();
-                startActivity(new Intent(notesactivity.this,MainActivity.class));
+                startActivity(new Intent(passwordactivity.this,MainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -222,15 +223,15 @@ public class notesactivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        noteAdapter.startListening();
+        passAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-       if(noteAdapter!=null)
+       if(passAdapter!=null)
        {
-           noteAdapter.stopListening();
+           passAdapter.stopListening();
        }
     }
 
