@@ -49,7 +49,7 @@ public class passwordactivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
 
-    FirestoreRecyclerAdapter<firebasemodelp,PassViewHolder> passAdapter;
+    FirestoreRecyclerAdapter<firebasemodel,PassViewHolder> passAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,35 +62,28 @@ public class passwordactivity extends AppCompatActivity {
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore=FirebaseFirestore.getInstance();
 
-        getSupportActionBar().setTitle("All Notes");
+        getSupportActionBar().setTitle("Passwords");
 
-        mcreatepass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(passwordactivity.this,createpass.class));
-
-            }
-        });
+        mcreatepass.setOnClickListener(v -> startActivity(new Intent(passwordactivity.this,createpass.class)));
 
 
         Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("title",Query.Direction.ASCENDING);
 
-        FirestoreRecyclerOptions<firebasemodelp> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodelp>().setQuery(query,firebasemodelp.class).build();
+        FirestoreRecyclerOptions<firebasemodel> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
 
-        passAdapter= new FirestoreRecyclerAdapter<firebasemodelp, PassViewHolder>(alluserpass) {
+        passAdapter= new FirestoreRecyclerAdapter<firebasemodel, PassViewHolder>(alluserpass) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void onBindViewHolder(@NonNull PassViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
 
-                ImageView popupbutton=PassViewHolder.itemView.findViewById(R.id.menupopbuttonp);
+                ImageView popupbutton=passViewHolder.itemView.findViewById(R.id.menupopbuttonp);
 
                 int colourcode=getRandomColor();
                 noteViewHolder.mpass.setBackgroundColor(PassViewHolder.itemView.getResources().getColor(colourcode,null));
 
-                noteViewHolder.passtitle.setText(firebasemodel.getTitle());
-                noteViewHolder.passcontent.setText(firebasemodel.getContent());
+                noteViewHolder.passtitle.setText(firebasemodel.getSite());
+                noteViewHolder.passcontent.setText(firebasemodel.getPassword());
 
                 String docIdp=passAdapter.getSnapshots().getSnapshot(i).getId();
 
@@ -101,8 +94,8 @@ public class passwordactivity extends AppCompatActivity {
 
 
                         Intent intent=new Intent(v.getContext(),passdetails.class);
-                        intent.putExtra("site",firebasemodelp.getSite());
-                        intent.putExtra("password",firebasemodelp.getPassword());
+                        intent.putExtra("site",firebasemodel.getSite());
+                        intent.putExtra("password",firebasemodel.getPassword());
                         intent.putExtra("passId",docIdp);
 
                         v.getContext().startActivity(intent);
@@ -123,8 +116,8 @@ public class passwordactivity extends AppCompatActivity {
                             public boolean onMenuItemClick(MenuItem item) {
 
                                 Intent intent=new Intent(v.getContext(),editnoteactivity.class);
-                                intent.putExtra("site",firebasemodelp.getSite());
-                                intent.putExtra("password",firebasemodelp.getPassword());
+                                intent.putExtra("site",firebasemodel.getSite());
+                                intent.putExtra("password",firebasemodel.getPassword());
                                 intent.putExtra("passId",docIdp);
                                 v.getContext().startActivity(intent);
                                 return false;
@@ -135,11 +128,11 @@ public class passwordactivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 //Toast.makeText(v.getContext(),"This note is deleted",Toast.LENGTH_SHORT).show();
-                                DocumentReference documentReference=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").document(docIdp);
+                                DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document(docIdp);
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(v.getContext(),"This note is deleted",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(v.getContext(),"Password is deleted",Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -180,7 +173,6 @@ public class passwordactivity extends AppCompatActivity {
 
     public class PassViewHolder extends RecyclerView.ViewHolder
     {
-        public static View itemView;
         private TextView passtitle;
         private TextView passcontent;
         LinearLayout mpass;

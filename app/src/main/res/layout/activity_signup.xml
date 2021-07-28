@@ -78,12 +78,13 @@
         android:layout_marginLeft="30dp"
         app:passwordToggleEnabled="true"
         >
+
         <EditText
+            android:id="@+id/signuppassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/signuppassword"
             android:hint="Enter Your Password"
-            >
+            android:inputType="textPassword">
 
         </EditText>
     </com.google.android.material.textfield.TextInputLayout>

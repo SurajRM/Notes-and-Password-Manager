@@ -35,15 +35,15 @@ public class passdetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),editpassactivity.class);
-                intent.putExtra("title",data.getStringExtra("title"));
-                intent.putExtra("content",data.getStringExtra("content"));
-                intent.putExtra("noteId",data.getStringExtra("noteId"));
+                intent.putExtra("site",data.getStringExtra("site"));
+                intent.putExtra("password",data.getStringExtra("password"));
+                intent.putExtra("passId",data.getStringExtra("passId"));
                 v.getContext().startActivity(intent);
             }
         });
 
-        mcontentofpassdetail.setText(data.getStringExtra("content"));
-        mtitleofpassdetail.setText(data.getStringExtra("title"));
+        mcontentofpassdetail.setText(data.getStringExtra("password"));
+        mtitleofpassdetail.setText(data.getStringExtra("site"));
     }
 
     @Override
