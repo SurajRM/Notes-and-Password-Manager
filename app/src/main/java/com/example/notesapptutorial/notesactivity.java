@@ -253,9 +253,6 @@ public class notesactivity extends AppCompatActivity {
         Random random=new Random();
         int number=random.nextInt(colorcode.size());
         return colorcode.get(number);
-
-
-
     }
 
 }

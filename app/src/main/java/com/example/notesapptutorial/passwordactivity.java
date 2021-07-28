@@ -67,30 +67,30 @@ public class passwordactivity extends AppCompatActivity {
         mcreatepass.setOnClickListener(v -> startActivity(new Intent(passwordactivity.this,createpass.class)));
 
 
-        Query query=firebaseFirestore.collection("notes").document(firebaseUser.getUid()).collection("myNotes").orderBy("title",Query.Direction.ASCENDING);
+        Query query=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").orderBy("site",Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<firebasemodel> alluserpass= new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
 
         passAdapter= new FirestoreRecyclerAdapter<firebasemodel, PassViewHolder>(alluserpass) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
-            protected void onBindViewHolder(@NonNull PassViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
+            protected void onBindViewHolder(@NonNull PassViewHolder passViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
 
                 ImageView popupbutton=passViewHolder.itemView.findViewById(R.id.menupopbuttonp);
 
                 int colourcode=getRandomColor();
-                noteViewHolder.mpass.setBackgroundColor(PassViewHolder.itemView.getResources().getColor(colourcode,null));
+                passViewHolder.mpass.setBackgroundColor(passViewHolder.itemView.getResources().getColor(colourcode,null));
 
-                noteViewHolder.passtitle.setText(firebasemodel.getSite());
-                noteViewHolder.passcontent.setText(firebasemodel.getPassword());
+                passViewHolder.passtitle.setText(firebasemodel.getSite());
+                passViewHolder.passcontent.setText(firebasemodel.getPassword());
 
                 String docIdp=passAdapter.getSnapshots().getSnapshot(i).getId();
 
-                PassViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                passViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //we have to open note detail activity
+                        //we have to open password detail activity
 
 
                         Intent intent=new Intent(v.getContext(),passdetails.class);
@@ -115,7 +115,7 @@ public class passwordactivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
 
-                                Intent intent=new Intent(v.getContext(),editnoteactivity.class);
+                                Intent intent=new Intent(v.getContext(),editpassactivity.class);
                                 intent.putExtra("site",firebasemodel.getSite());
                                 intent.putExtra("password",firebasemodel.getPassword());
                                 intent.putExtra("passId",docIdp);
@@ -127,7 +127,7 @@ public class passwordactivity extends AppCompatActivity {
                         popupMenu.getMenu().add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
-                                //Toast.makeText(v.getContext(),"This note is deleted",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(v.getContext(),"This password is deleted",Toast.LENGTH_SHORT).show();
                                 DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document(docIdp);
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -182,8 +182,6 @@ public class passwordactivity extends AppCompatActivity {
             passtitle=itemView.findViewById(R.id.passtitle);
             passcontent=itemView.findViewById(R.id.passcontent);
             mpass=itemView.findViewById(R.id.pass);
-
-
         }
     }
 
@@ -246,9 +244,6 @@ public class passwordactivity extends AppCompatActivity {
         Random random=new Random();
         int number=random.nextInt(colorcode.size());
         return colorcode.get(number);
-
-
-
     }
 
 }

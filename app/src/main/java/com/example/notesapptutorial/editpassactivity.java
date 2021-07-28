@@ -25,7 +25,7 @@ import java.util.Map;
 public class editpassactivity extends AppCompatActivity {
 
     Intent data;
-    EditText medittitleofpass,meditcontentofpass;
+    EditText meditsiteofpass,meditpasswordofpass;
     FloatingActionButton msaveeditpass;
 
     FirebaseAuth firebaseAuth;
@@ -37,8 +37,8 @@ public class editpassactivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editpassactivity);
-        medittitleofpass=findViewById(R.id.edittitleofpass);
-        meditcontentofpass=findViewById(R.id.editcontentofpass);
+        meditsiteofpass=findViewById(R.id.editsiteofpass);
+        meditpasswordofpass=findViewById(R.id.editpasswordofpass);
         msaveeditpass=findViewById(R.id.saveeditpass);
 
         data=getIntent();
@@ -58,10 +58,10 @@ public class editpassactivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(),"savebuton click",Toast.LENGTH_SHORT).show();
 
-                String newtitle=medittitleofpass.getText().toString();
-                String newcontent=meditcontentofpass.getText().toString();
+                String newsite=meditsiteofpass.getText().toString();
+                String newpassword=meditpasswordofpass.getText().toString();
 
-                if(newtitle.isEmpty()||newcontent.isEmpty())
+                if(newsite.isEmpty()||newpassword.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),"Something is empty",Toast.LENGTH_SHORT).show();
                     return;
@@ -70,8 +70,8 @@ public class editpassactivity extends AppCompatActivity {
                 {
                     DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document(data.getStringExtra("passId"));
                     Map<String,Object> pass=new HashMap<>();
-                    pass.put("title",newtitle);
-                    pass.put("content",newcontent);
+                    pass.put("site",newsite);
+                    pass.put("password",newpassword);
                     documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -92,8 +92,8 @@ public class editpassactivity extends AppCompatActivity {
 
         String passSite=data.getStringExtra("site");
         String passPassword=data.getStringExtra("password");
-        meditcontentofpass.setText(passPassword);
-        medittitleofpass.setText(passSite);
+        meditpasswordofpass.setText(passPassword);
+        meditsiteofpass.setText(passSite);
     }
 
     @Override

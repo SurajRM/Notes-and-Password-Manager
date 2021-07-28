@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class createpass extends AppCompatActivity {
 
-    EditText mcreatetitleofpass,mcreatecontentofpass;
+    EditText mcreatesiteofpass,mcreatepasswordofpass;
     FloatingActionButton msavepass;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -41,8 +41,8 @@ public class createpass extends AppCompatActivity {
 
 
         msavepass=findViewById(R.id.savepass);
-        mcreatecontentofpass=findViewById(R.id.createcontentofpass);
-        mcreatetitleofpass=findViewById(R.id.createtitleofpass);
+        mcreatepasswordofpass=findViewById(R.id.createpasswordofpass);
+        mcreatesiteofpass=findViewById(R.id.createsiteofpass);
 
         mprogressbarofcreatepass=findViewById(R.id.progressbarofcreatepass);
         Toolbar toolbar=findViewById(R.id.toolbarofcreatepass);
@@ -58,11 +58,11 @@ public class createpass extends AppCompatActivity {
         msavepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title=mcreatetitleofpass.getText().toString();
-                String content=mcreatecontentofpass.getText().toString();
-                if(title.isEmpty() || content.isEmpty())
+                String site=mcreatesiteofpass.getText().toString();
+                String password=mcreatepasswordofpass.getText().toString();
+                if(site.isEmpty() || password.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(),"Both field are Require",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Both fields are Required",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -71,8 +71,8 @@ public class createpass extends AppCompatActivity {
 
                     DocumentReference documentReference=firebaseFirestore.collection("passwords").document(firebaseUser.getUid()).collection("myPasswords").document();
                     Map<String ,Object> pass= new HashMap<>();
-                    pass.put("title",title);
-                    pass.put("content",content);
+                    pass.put("site",site);
+                    pass.put("password",password);
 
                     documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

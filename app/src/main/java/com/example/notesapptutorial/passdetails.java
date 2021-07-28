@@ -15,15 +15,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class passdetails extends AppCompatActivity {
 
 
-    private TextView mtitleofpassdetail,mcontentofpassdetail;
+    private TextView msiteofpassdetail,mpasswordofpassdetail;
     FloatingActionButton mgotoeditpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passdetails);
-        mtitleofpassdetail=findViewById(R.id.titleofpassdetail);
-        mcontentofpassdetail=findViewById(R.id.contentofpassdetail);
+        msiteofpassdetail=findViewById(R.id.siteofpassdetail);
+        mpasswordofpassdetail=findViewById(R.id.passwordofpassdetail);
         mgotoeditpass=findViewById(R.id.gotoeditpass);
         Toolbar toolbar=findViewById(R.id.toolbarofpassdetail);
         setSupportActionBar(toolbar);
@@ -42,8 +42,8 @@ public class passdetails extends AppCompatActivity {
             }
         });
 
-        mcontentofpassdetail.setText(data.getStringExtra("password"));
-        mtitleofpassdetail.setText(data.getStringExtra("site"));
+        mpasswordofpassdetail.setText(data.getStringExtra("password"));
+        msiteofpassdetail.setText(data.getStringExtra("site"));
     }
 
     @Override
