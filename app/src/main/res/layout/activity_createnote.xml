@@ -16,28 +16,30 @@
 
 
         <EditText
+            android:id="@+id/createtitleofnote"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="12dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:hint="Enter your note title here"
-            android:id="@+id/createtitleofnote" />
+            android:inputType="textShortMessage"
+            android:paddingTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
+        android:id="@+id/createcontentofnote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="15sp"
+        android:layout_below="@id/toolbarofcreatenote"
         android:background="#faf7f7"
         android:gravity="top|left"
-        android:textColor="@color/black"
         android:hint="Enter your note content here"
-        android:layout_below="@id/toolbarofcreatenote"
+        android:inputType="textLongMessage"
         android:padding="15dp"
-        android:id="@+id/createcontentofnote">
+        android:textColor="@color/black"
+        android:textSize="15sp">
 
     </EditText>
 

@@ -20,7 +20,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:id="@+id/edittitleofpass" />
+            android:id="@+id/editsiteofpass" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -33,7 +33,7 @@
         android:textColor="@color/black"
         android:layout_below="@id/toolbarofeditpass"
         android:padding="15dp"
-        android:id="@+id/editcontentofpass">
+        android:id="@+id/editpasswordofpass">
 
     </EditText>
 

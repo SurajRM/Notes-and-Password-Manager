@@ -15,15 +15,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class passdetails extends AppCompatActivity {
 
 
-    private TextView mtitleofpassdetail,mcontentofpassdetail;
+    private TextView msiteofpassdetail,mpasswordofpassdetail;
     FloatingActionButton mgotoeditpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passdetails);
-        mtitleofpassdetail=findViewById(R.id.titleofpassdetail);
-        mcontentofpassdetail=findViewById(R.id.contentofpassdetail);
+        msiteofpassdetail=findViewById(R.id.siteofpassdetail);
+        mpasswordofpassdetail=findViewById(R.id.passwordofpassdetail);
         mgotoeditpass=findViewById(R.id.gotoeditpass);
         Toolbar toolbar=findViewById(R.id.toolbarofpassdetail);
         setSupportActionBar(toolbar);
@@ -35,15 +35,15 @@ public class passdetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),editpassactivity.class);
-                intent.putExtra("title",data.getStringExtra("title"));
-                intent.putExtra("content",data.getStringExtra("content"));
-                intent.putExtra("noteId",data.getStringExtra("noteId"));
+                intent.putExtra("site",data.getStringExtra("site"));
+                intent.putExtra("password",data.getStringExtra("password"));
+                intent.putExtra("passId",data.getStringExtra("passId"));
                 v.getContext().startActivity(intent);
             }
         });
 
-        mcontentofpassdetail.setText(data.getStringExtra("content"));
-        mtitleofpassdetail.setText(data.getStringExtra("title"));
+        mpasswordofpassdetail.setText(data.getStringExtra("password"));
+        msiteofpassdetail.setText(data.getStringExtra("site"));
     }
 
     @Override
