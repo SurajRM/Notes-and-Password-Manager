@@ -25,10 +25,11 @@
         <activity
             android:name=".createnote"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".createpass"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".notesactivity" />
         <activity android:name=".passwordactivity" />
-        <activity android:name=".createpass"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".fogotpassword" />
         <activity android:name=".signup" />
         <activity android:name=".MainActivity">
