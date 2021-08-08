@@ -9,14 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NotesApptutorial">
-        <activity android:name=".notedetails"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
-        <activity android:name=".editnoteactivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".HomeActivity"></activity>
+        <activity
+            android:name=".notedetails"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".passdetails"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".editnoteactivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".editpassactivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".createnote"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".notesactivity" />
+        <activity android:name=".passwordactivity" />
+        <activity android:name=".createpass"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".fogotpassword" />
         <activity android:name=".signup" />
         <activity android:name=".MainActivity">
