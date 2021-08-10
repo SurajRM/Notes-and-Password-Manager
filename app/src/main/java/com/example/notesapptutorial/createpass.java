@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class createpass extends AppCompatActivity {
 
-    EditText mcreatesiteofpass,mcreatepasswordofpass;
+    EditText mcreatesiteofpass,mcreatepasswordofpass,mcreateuseridofpass;
     FloatingActionButton msavepass;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -43,6 +43,7 @@ public class createpass extends AppCompatActivity {
         msavepass=findViewById(R.id.savepass);
         mcreatepasswordofpass=findViewById(R.id.createpasswordofpass);
         mcreatesiteofpass=findViewById(R.id.createsiteofpass);
+        mcreateuseridofpass=findViewById(R.id.createuseridofpass);
 
         mprogressbarofcreatepass=findViewById(R.id.progressbarofcreatepass);
         Toolbar toolbar=findViewById(R.id.toolbarofcreatepass);
@@ -60,9 +61,10 @@ public class createpass extends AppCompatActivity {
             public void onClick(View v) {
                 String site=mcreatesiteofpass.getText().toString();
                 String password=mcreatepasswordofpass.getText().toString();
-                if(site.isEmpty() || password.isEmpty())
+                String userid=mcreateuseridofpass.getText().toString();
+                if(site.isEmpty() || password.isEmpty()|| userid.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(),"Both fields are Required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"All fields are Required",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -73,6 +75,7 @@ public class createpass extends AppCompatActivity {
                     Map<String ,Object> pass= new HashMap<>();
                     pass.put("site",site);
                     pass.put("password",password);
+                    pass.put("userid",userid);
 
                     documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

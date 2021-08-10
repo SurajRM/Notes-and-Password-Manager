@@ -38,6 +38,7 @@ public class notedetails extends AppCompatActivity {
                 intent.putExtra("title",data.getStringExtra("title"));
                 intent.putExtra("content",data.getStringExtra("content"));
                 intent.putExtra("noteId",data.getStringExtra("noteId"));
+
                 v.getContext().startActivity(intent);
             }
         });

@@ -25,7 +25,7 @@ import java.util.Map;
 public class editpassactivity extends AppCompatActivity {
 
     Intent data;
-    EditText meditsiteofpass,meditpasswordofpass;
+    EditText meditsiteofpass,meditpasswordofpass,medituseridofpass;
     FloatingActionButton msaveeditpass;
 
     FirebaseAuth firebaseAuth;
@@ -40,6 +40,7 @@ public class editpassactivity extends AppCompatActivity {
         meditsiteofpass=findViewById(R.id.editsiteofpass);
         meditpasswordofpass=findViewById(R.id.editpasswordofpass);
         msaveeditpass=findViewById(R.id.saveeditpass);
+        medituseridofpass=findViewById(R.id.edituseridofpass);
 
         data=getIntent();
 
@@ -60,10 +61,11 @@ public class editpassactivity extends AppCompatActivity {
 
                 String newsite=meditsiteofpass.getText().toString();
                 String newpassword=meditpasswordofpass.getText().toString();
+                String newuserid=medituseridofpass.getText().toString();
 
-                if(newsite.isEmpty()||newpassword.isEmpty())
+                if(newsite.isEmpty()||newpassword.isEmpty()||newuserid.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(),"Something is empty",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"All fields necessary",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else
@@ -72,6 +74,7 @@ public class editpassactivity extends AppCompatActivity {
                     Map<String,Object> pass=new HashMap<>();
                     pass.put("site",newsite);
                     pass.put("password",newpassword);
+                    pass.put("userid",newuserid);
                     documentReference.set(pass).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -92,7 +95,9 @@ public class editpassactivity extends AppCompatActivity {
 
         String passSite=data.getStringExtra("site");
         String passPassword=data.getStringExtra("password");
+        String passUserid=data.getStringExtra("userid");
         meditpasswordofpass.setText(passPassword);
+        medituseridofpass.setText(passUserid);
         meditsiteofpass.setText(passSite);
     }
 

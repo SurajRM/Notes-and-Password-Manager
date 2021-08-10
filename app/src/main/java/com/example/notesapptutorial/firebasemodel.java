@@ -6,18 +6,20 @@ public class firebasemodel {
     private String content;
     private String site;
     private String password;
+    private String userid;
 
     public firebasemodel()
     {
 
     }
 
-    public  firebasemodel (String title, String content, String site, String password)
+    public  firebasemodel (String title, String content, String site, String password, String userid)
     {
         this.title=title;
         this.content=content;
         this.site = site;
-        this .password = password;
+        this.password = password;
+        this.userid = userid;
     }
 
 
@@ -51,6 +53,14 @@ public class firebasemodel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }
 

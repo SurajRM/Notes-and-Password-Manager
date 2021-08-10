@@ -7,37 +7,53 @@
     tools:context=".createpass">
 
 
-
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarofcreatepass"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbarofcreatepass"
-        android:background="@color/white">
+        android:background="@color/teal_200">
 
 
         <EditText
+            android:id="@+id/createsiteofpass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="12dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:hint="Enter the website here"
-            android:id="@+id/createsiteofpass" />
+            android:paddingTop="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="#474141"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
+        android:id="@+id/createuseridofpass"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="15sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarofcreatepass"
         android:background="#faf7f7"
         android:gravity="top|left"
-        android:textColor="@color/black"
-        android:hint="Enter your password here"
-        android:layout_below="@id/toolbarofcreatepass"
+        android:hint="Enter your Username here"
         android:padding="15dp"
-        android:id="@+id/createpasswordofpass">
+        android:textColor="@color/black"
+        android:textColorHint="#474141"
+        android:textSize="15sp">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/createpasswordofpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createuseridofpass"
+        android:background="#faf7f7"
+        android:gravity="top|left"
+        android:hint="Enter your Password here"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#474141"
+        android:textSize="15sp">
 
     </EditText>
 

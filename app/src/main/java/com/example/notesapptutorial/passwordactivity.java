@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,7 +84,10 @@ public class passwordactivity extends AppCompatActivity {
                 passViewHolder.mpass.setBackgroundColor(passViewHolder.itemView.getResources().getColor(colourcode,null));
 
                 passViewHolder.passtitle.setText(firebasemodel.getSite());
+
                 passViewHolder.passcontent.setText(firebasemodel.getPassword());
+
+                passViewHolder.passuserid.setText(firebasemodel.getUserid());
 
                 String docIdp=passAdapter.getSnapshots().getSnapshot(i).getId();
 
@@ -96,6 +100,7 @@ public class passwordactivity extends AppCompatActivity {
                         Intent intent=new Intent(v.getContext(),passdetails.class);
                         intent.putExtra("site",firebasemodel.getSite());
                         intent.putExtra("password",firebasemodel.getPassword());
+                        intent.putExtra("uid", firebasemodel.getUserid());
                         intent.putExtra("passId",docIdp);
 
                         v.getContext().startActivity(intent);
@@ -114,10 +119,12 @@ public class passwordactivity extends AppCompatActivity {
                         popupMenu.getMenu().add("Edit").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
+                                //details for edit password activity
 
                                 Intent intent=new Intent(v.getContext(),editpassactivity.class);
                                 intent.putExtra("site",firebasemodel.getSite());
                                 intent.putExtra("password",firebasemodel.getPassword());
+                                intent.putExtra("uid", firebasemodel.getUserid());
                                 intent.putExtra("passId",docIdp);
                                 v.getContext().startActivity(intent);
                                 return false;
@@ -175,12 +182,14 @@ public class passwordactivity extends AppCompatActivity {
     {
         private TextView passtitle;
         private TextView passcontent;
+        private TextView passuserid;
         LinearLayout mpass;
 
         public PassViewHolder(@NonNull View itemView) {
             super(itemView);
             passtitle=itemView.findViewById(R.id.passtitle);
             passcontent=itemView.findViewById(R.id.passcontent);
+            passuserid=itemView.findViewById(R.id.passuid);
             mpass=itemView.findViewById(R.id.pass);
         }
     }

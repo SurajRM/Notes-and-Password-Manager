@@ -7,35 +7,52 @@
     tools:context=".passdetails">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarofpassdetail"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/toolbarofpassdetail"
-        android:background="@color/white">
+        android:background="@color/teal_200">
 
 
         <TextView
+            android:id="@+id/siteofpassdetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="12dp"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:text="Title Displayerd Here"
+            android:text="Website"
             android:textColor="@color/black"
-            android:id="@+id/siteofpassdetail" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
+        android:id="@+id/usernameofpassdetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="17sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarofpassdetail"
         android:background="#faf7f7"
         android:gravity="top|left"
-        android:textColor="@color/black"
-        android:hint="Enter your note content here"
-        android:layout_below="@id/toolbarofpassdetail"
+        android:hint="Enter your Username here"
+        android:visibility="gone"
         android:padding="15dp"
-        android:id="@+id/passwordofpassdetail">
+        android:textColor="@color/black"
+        android:textColorHint="#474141"
+        android:textSize="17sp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/passwordofpassdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameofpassdetail"
+        android:background="#faf7f7"
+        android:gravity="top|left"
+        android:hint="Enter your Password here"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#474141"
+        android:textSize="17sp">
 
     </TextView>
 

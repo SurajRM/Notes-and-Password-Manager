@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class passdetails extends AppCompatActivity {
 
 
-    private TextView msiteofpassdetail,mpasswordofpassdetail;
+    private TextView msiteofpassdetail,mpasswordofpassdetail, musernameofpassdetail;
     FloatingActionButton mgotoeditpass;
 
     @Override
@@ -25,6 +25,7 @@ public class passdetails extends AppCompatActivity {
         msiteofpassdetail=findViewById(R.id.siteofpassdetail);
         mpasswordofpassdetail=findViewById(R.id.passwordofpassdetail);
         mgotoeditpass=findViewById(R.id.gotoeditpass);
+        musernameofpassdetail=findViewById(R.id.usernameofpassdetail);
         Toolbar toolbar=findViewById(R.id.toolbarofpassdetail);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -38,11 +39,13 @@ public class passdetails extends AppCompatActivity {
                 intent.putExtra("site",data.getStringExtra("site"));
                 intent.putExtra("password",data.getStringExtra("password"));
                 intent.putExtra("passId",data.getStringExtra("passId"));
+                intent.putExtra("userId",data.getStringExtra("userId"));
                 v.getContext().startActivity(intent);
             }
         });
 
         mpasswordofpassdetail.setText(data.getStringExtra("password"));
+        musernameofpassdetail.setText(data.getStringExtra("userId"));
         msiteofpassdetail.setText(data.getStringExtra("site"));
     }
 

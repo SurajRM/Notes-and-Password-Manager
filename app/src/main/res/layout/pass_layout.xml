@@ -61,17 +61,35 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/passcontent"
-
+                android:id="@+id/passuid"
+                android:layout_below="@+id/passtitle"
                 android:paddingBottom="20dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="10dp"
-                android:text="This is your code which appear here"
+                android:text="uid here"
                 android:textSize="15sp"
                 android:textColor="@color/black">
-                
+
             </TextView>
+
+            <TextView
+                android:id="@+id/passcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passuid"
+                android:visibility="gone"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                android:text="paasword here"
+                android:textColor="@color/black"
+                android:textSize="15sp">
+
+            </TextView>
+
+
 
 
         </LinearLayout>
